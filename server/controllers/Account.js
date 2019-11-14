@@ -6,9 +6,20 @@ const loginPage = (req, res) => {
   res.render('login', { csrfToken: req.csrfToken() });
 };
 
-// const signupPage = (req, res) => {
-//   res.render('signup', { csrfToken: req.csrfToken() });
-// };
+const homePage = (req, res) => {
+  res.render('homePage', { name: req.session.account,});
+};
+
+const userPage = (req, res) => {
+  res.render('user', {
+    csrfToken: req.csrfToken,
+    name: req.session.account.username,
+  });
+};
+
+const signupPage = (req, res) => {
+  res.render('signup', { csrfToken: req.csrfToken() });
+};
 
 const logout = (req, res) => {
   req.session.destroy();
@@ -25,7 +36,7 @@ const login = (request, response) => {
 
   if (!username || !password) {
     return res.status(400).json({
-      error: 'RAWR! All fields are required',
+      error: 'All fields are required',
     });
   }
 
@@ -39,7 +50,7 @@ const login = (request, response) => {
     req.session.account = Account.AccountModel.toAPI(account);
 
     return res.json({
-      redirect: '/maker',
+      redirect: '/userPage',
     });
   });
 };
@@ -55,13 +66,13 @@ const signup = (request, response) => {
 
   if (!req.body.username || !req.body.pass || !req.body.pass2) {
     return res.status(400).json({
-      error: 'RAWR! All fields are required',
+      error: 'All fields are required',
     });
   }
 
   if (req.body.pass !== req.body.pass2) {
     return res.status(400).json({
-      error: 'RAWR! Passwords do not match',
+      error: 'Passwords do not match',
     });
   }
 
@@ -79,7 +90,7 @@ const signup = (request, response) => {
     savePromise.then(() => {
       req.session.account = Account.AccountModel.toAPI(newAccount);
       return res.json({
-        redirect: '/maker',
+        redirect: '/userPage',
       });
     });
 
@@ -99,22 +110,13 @@ const signup = (request, response) => {
   });
 };
 
-const getToken = (request, response) => {
-  const req = request;
-  const res = response;
-
-  const csrfJSON = {
-    csrfToken: req.csrfToken(),
-  };
-
-  res.json(csrfJSON);
-};
 
 module.exports = {
   loginPage,
   login,
   logout,
-  // signupPage,
+  signupPage,
   signup,
-  getToken,
+  homePage,
+  userPage,
 };
