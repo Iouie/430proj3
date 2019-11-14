@@ -45,18 +45,22 @@
             </form>
             <div class='row'>
                 <div class='col text-center'>
+                    <input id="signupCsrf" type="hidden" name="_csrf" value={{csrfToken}} />
                     <p>Have an account? <a href='./login'>Login</a></p>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='col text-center'>
+                    <div class="alert alert-danger" id="errorMessage" role="alert">
+                    </div>
                 </div>
             </div>
             </form>
         </section>
-        <section id="content"></section>
-        <div id="domoMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box" />
-            <h3><span id="errorMessage">Wrong username or password</span></h3><img id="domo" src="assets/img/domo.png"
-                alt="domo" />
-        </div>
+
     </div>
-    <script src='/assets/loginBundle.js'></script>
+    <script src='/assets/bundle.js'></script>
 </body>
 
 </html>

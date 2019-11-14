@@ -2,7 +2,6 @@
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#errorMessage").fadeIn(400);
 };
 
 var sendAjax = function sendAjax(action, data) {
@@ -29,7 +28,6 @@ $(document).ready(function () {
   $("#signupForm").on("submit", function (e) {
     e.preventDefault();
 
-    $("#error").fadeOut(400);
 
     if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
       handleError("All fields are required");
@@ -49,15 +47,9 @@ $(document).ready(function () {
   $("#loginForm").on("submit", function (e) {
     e.preventDefault();
 
-    $("#error").fadeOut(400);
 
-    if ($("#user").val() == '') {
-      handleError("Username is required");
-      return false;
-    }
-
-    if ($("#pass").val() == '') {
-      handleError("Password is required");
+    if ($("#user").val() == '' || $('#pass').val() == '') {
+      handleError("All fields required");
       return false;
     }
 

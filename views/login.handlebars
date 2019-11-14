@@ -26,7 +26,7 @@
 
             <div class='row justify-content-center'>
                 <div class='form-group .col-md-3'>
-        <input class='field' id='password' type='password' name='password' placeholder='Password' />
+        <input class='field' id='pass' type='password' name='password' placeholder='Password' />
         </div>
         </div>
 
@@ -39,18 +39,22 @@
 
               <div class='row justify-content-center'>
                 <div class='form-group .col-md-3'>
+   <input id="loginCsrf" type="hidden" name="_csrf" value={{csrfToken}} />
   <p>Dont have an account? <a href='./signup'>Sign Up</a></p>
   </div>
   </div>
   </form>
   </section>
-    <section id="content"></section>
-  <div id="domoMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
-    <h3><span id="errorMessage">Wrong username or password</span></h3><img id="domo" src="assets/img/domo.png" alt="domo"/>
-  </div>
+              <div class='row'>
+                <div class='col text-center'>
+                    <div class="alert alert-danger" id="errorMessage" role="alert">
+                        Passwords do not match
+                    </div>
+                </div>
+            </div>
   </div>
 
-  <script src='/assets/loginBundle.js'></script>
+  <script src='/assets/bundle.js'></script>
 </body>
 
 </html>
