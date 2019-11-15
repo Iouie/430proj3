@@ -14,7 +14,7 @@
         <section id='signup'>
             <div class='greeting text-center'>
                 <h1><img class='icon' src='./assets/img/favicon.png' alt='hamburger'>HELLO<img class='icon'
-                        src='./assets/img/favicon.png' alt='hamburger'></h1>
+                        src='./assets/img/favicon.png' alt='hamburger2'></h1>
             </div>
 
             <form id='signupForm' name='signupForm' action='/signup' method='POST' class='mainForm'>
@@ -38,6 +38,7 @@
 
                 <div class='row justify-content-center'>
                     <div class='col-md-1'>
+                        <input id="signupCsrf" type="hidden" name="_csrf" value={{csrfToken}} />
                         <button class='btn btn-outline-light' id='signupButton' type='submit'>Sign Up</button>
                     </div>
                 </div>
@@ -45,14 +46,13 @@
             </form>
             <div class='row'>
                 <div class='col text-center'>
-                    <input id="signupCsrf" type="hidden" name="_csrf" value={{csrfToken}} />
                     <p>Have an account? <a href='./login'>Login</a></p>
                 </div>
             </div>
 
             <div class='row'>
                 <div class='col text-center'>
-                    <div class="alert alert-danger" id="errorMessage" role="alert">
+                    <div class="alert alert-danger" id="errorMessage" role="alert" style='display:none;'>
                     </div>
                 </div>
             </div>

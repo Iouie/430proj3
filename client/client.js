@@ -1,6 +1,6 @@
 const handleError = (message) => {
     $("#errorMessage").text(message);
-    $("#errorMessage").fadeIn(400);
+    $("#errorMessage").show();
   }
   
   const sendAjax = (action, data) => {
@@ -11,7 +11,7 @@ const handleError = (message) => {
       data: data,
       dataType: "json",
       success: (result, status, xhr) => {
-        $("#errorMessage").fadeOut(400);
+        $("#errorMessage").hide();
   
         window.location = result.redirect;
       },
@@ -27,7 +27,7 @@ const handleError = (message) => {
     $("#signupForm").on("submit", (e) => {
       e.preventDefault();
   
-      $("#errorMessage").fadeOut(400);
+      $("#errorMessage").hide();
   
       if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
         handleError("All fields are required");
@@ -47,7 +47,7 @@ const handleError = (message) => {
     $("#loginForm").on("submit", (e) => {
       e.preventDefault();
   
-      $("#errorMessage").fadeOut(400);
+      $("#errorMessage").hide();
 
       if($("#user").val() == '') {
         handleError("Username is required");
@@ -59,28 +59,9 @@ const handleError = (message) => {
         return false;
       }
   
+
       sendAjax($("#loginForm").attr("action"), $("#loginForm").serialize());
   
       return false;
     });
-
-//     $("#changePasswordForm").on("submit", (e) => {
-//       e.preventDefault();
-  
-//       $("#error").fadeOut(400);
-  
-//       if($("#currentPass").val() == '' || $("#newPass").val() == '' || $("#pass2").val() == '') {
-//         showError("All fields are required");
-//         return false;
-//       }
-  
-//       if($("#newPass").val() !== $("#pass2").val()) {
-//         showError("Passwords do not match");
-//         return false;           
-//       }
-  
-//       sendAjax($("#changePasswordForm").attr("action"), $("#changePasswordForm").serialize());
-  
-//       return false;
-//     });
-//   });
+});

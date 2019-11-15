@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <title>BIG BELLY</title>
-
 </head>
 
 <body class='logsign-page'>
@@ -18,40 +17,39 @@
       </div>
 
       <form id='loginForm' name='loginForm' action='/login' method='POST' class='mainForm'>
+        <div class='row justify-content-center'>
+          <div class='form-group .col-md-3'>
+            <input class='field' id='user' type='text' name='username' placeholder='Username' />
+          </div>
+        </div>
+
+        <div class='row justify-content-center'>
+          <div class='form-group .col-md-3'>
+            <input class='field' id='pass' type='password' name='password' placeholder='Password' />
+          </div>
+        </div>
+
+        <div class='row justify-content-center'>
+          <div class='form-group .col-md-3'>
+            <input id="loginCsrf" type="hidden" name="_csrf" value={{csrfToken}} />
+            <input class='btn btn-outline-light' id='loginButton' type='submit' value='Sign In' />
+          </div>
+        </div>
+      </form>
+
       <div class='row justify-content-center'>
         <div class='form-group .col-md-3'>
-          <input class='field' id='user' type='text' name='username' placeholder='Username' />
+          <p>Dont have an account? <a href='./signup'>Sign Up</a></p>
         </div>
+      </div>
+      </form>
+    </section>
+    <div class='row'>
+      <div class='col text-center'>
+        <div class="alert alert-danger" id="errorMessage" role="alert" style='display:none;'>
         </div>
-
-            <div class='row justify-content-center'>
-                <div class='form-group .col-md-3'>
-        <input class='field' id='pass' type='password' name='password' placeholder='Password' />
-        </div>
-        </div>
-
-            <div class='row justify-content-center'>
-                <div class='form-group .col-md-3'>
-  <input class='btn btn-outline-light' id='loginButton' type='submit'value='Sign In' />
-  </div>
-  </div>
-  </form> 
-
-              <div class='row justify-content-center'>
-                <div class='form-group .col-md-3'>
-   <input id="loginCsrf" type="hidden" name="_csrf" value={{csrfToken}} />
-  <p>Dont have an account? <a href='./signup'>Sign Up</a></p>
-  </div>
-  </div>
-  </form>
-  </section>
-              <div class='row'>
-                <div class='col text-center'>
-                    <div class="alert alert-danger" id="errorMessage" role="alert">
-                        Passwords do not match
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
   </div>
 
   <script src='/assets/bundle.js'></script>

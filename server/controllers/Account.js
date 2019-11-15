@@ -7,7 +7,7 @@ const loginPage = (req, res) => {
 };
 
 const homePage = (req, res) => {
-  res.render('homePage', { name: req.session.account,});
+  res.render('homePage', { name: req.session.account });
 };
 
 const userPage = (req, res) => {
@@ -50,7 +50,7 @@ const login = (request, response) => {
     req.session.account = Account.AccountModel.toAPI(account);
 
     return res.json({
-      redirect: '/userPage',
+      redirect: '/homePage',
     });
   });
 };
@@ -90,7 +90,7 @@ const signup = (request, response) => {
     savePromise.then(() => {
       req.session.account = Account.AccountModel.toAPI(newAccount);
       return res.json({
-        redirect: '/userPage',
+        redirect: '/homePage',
       });
     });
 
@@ -104,7 +104,7 @@ const signup = (request, response) => {
       }
 
       return res.status(400).json({
-        error: 'An error occured',
+        error: 'An error occurred',
       });
     });
   });

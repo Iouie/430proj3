@@ -1,60 +1,64 @@
 "use strict";
 
 var handleError = function handleError(message) {
-  $("#errorMessage").text(message);
+    $("#errorMessage").text(message);
+    $("#errorMessage").show();
 };
 
 var sendAjax = function sendAjax(action, data) {
-  $.ajax({
-    cache: false,
-    type: "POST",
-    url: action,
-    data: data,
-    dataType: "json",
-    success: function success(result, status, xhr) {
-      $("#errorMessage").fadeOut(400);
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url: action,
+        data: data,
+        dataType: "json",
+        success: (result, status, xhr) => {
+            $('#errorMessage').hide();
 
-      window.location = result.redirect;
-    },
-    error: function error(xhr, status, _error) {
-      var messageObj = JSON.parse(xhr.responseText);
-
-      handleError(messageObj.error);
-    }
-  });
+            window.location = result.redirect;
+        },
+          error: (xhr, status, error) => {
+            const messageObj = JSON.parse(xhr.responseText);
+      
+            handleError(messageObj.error);
+          }   
+    });
 };
 
+
 $(document).ready(function () {
-  $("#signupForm").on("submit", function (e) {
-    e.preventDefault();
+    $("#signupForm").on("submit", function (e) {
+        e.preventDefault();
 
+        $("#errorMessage").hide();
 
-    if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
-      handleError("All fields are required");
-      return false;
-    }
+        if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
+            handleError("All fields are required");
+            return false;
+        }
 
-    if ($("#pass").val() !== $("#pass2").val()) {
-      handleError("Passwords do not match");
-      return false;
-    }
+        if ($("#pass").val() !== $("#pass2").val()) {
+            handleError("Passwords do not match");
+            return false;
+        }
 
-    sendAjax($("#signupForm").attr("action"), $("#signupForm").serialize());
+        sendAjax($("#signupForm").attr("action"), $("#signupForm").serialize());
 
-    return false;
-  });
+        return false;
+    });
 
-  $("#loginForm").on("submit", function (e) {
-    e.preventDefault();
+    $("#loginForm").on("submit", function (e) {
+        e.preventDefault();
 
+        $("#errorMessage").hide();
 
-    if ($("#user").val() == '' || $('#pass').val() == '') {
-      handleError("All fields required");
-      return false;
-    }
+        if ($("#user").val() == '' || $('#pass').val() == '') {
+            handleError("All fields required");
+            return false;
+        }
 
-    sendAjax($("#loginForm").attr("action"), $("#loginForm").serialize());
+        sendAjax($("#loginForm").attr("action"), $("#loginForm").serialize());
 
-    return false;
-  });
+        return false;
+    });
 });
