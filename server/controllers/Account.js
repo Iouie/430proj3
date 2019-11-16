@@ -32,7 +32,7 @@ const login = (request, response) => {
 
   // force cast to cover security flaws
   const username = `${req.body.username}`;
-  const password = `${req.body.pass}`;
+  const password = `${req.body.password}`;
 
   if (!username || !password) {
     return res.status(400).json({
