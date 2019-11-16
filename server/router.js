@@ -9,7 +9,7 @@ const router = (app) => {
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
   app.get('/userPage', mid.requiresLogin, controllers.Account.userPage);
   app.get('/', controllers.Account.homePage);
-  app.get('/home', controllers.Account.homePage);
+  app.get('/homePage', controllers.Account.homePage);
   // app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
 };
 
