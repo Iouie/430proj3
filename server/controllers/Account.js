@@ -3,11 +3,15 @@ const models = require('../models');
 const Account = models.Account;
 
 const loginPage = (req, res) => {
-  res.render('login', { csrfToken: req.csrfToken() });
+  res.render('login', {
+    csrfToken: req.csrfToken(),
+  });
 };
 
 const homePage = (req, res) => {
-  res.render('homePage', { name: req.session.account });
+  res.render('homePage', {
+    name: req.session.account,
+  });
 };
 
 const userPage = (req, res) => {
@@ -18,7 +22,9 @@ const userPage = (req, res) => {
 };
 
 const signupPage = (req, res) => {
-  res.render('signup', { csrfToken: req.csrfToken() });
+  res.render('signup', {
+    csrfToken: req.csrfToken(),
+  });
 };
 
 const logout = (req, res) => {
@@ -110,6 +116,50 @@ const signup = (request, response) => {
   });
 };
 
+const changePassword = (request, response) => {
+  const req = request;
+  const res = response;
+
+  req.body.currentPassword = `${req.body.currentPassword}`;
+  req.body.newPass = `${req.body.newPass}`;
+  req.body.newPass2 = `${req.body.newPass2}`;
+
+  if (!req.body.currentPassword || !req.body.newPass || !req.body.newPass2) {
+    return res.status(400).json({
+      error: 'All fields are required',
+    });
+  }
+
+  if (req.body.newPass !== req.body.newPass2) {
+    return res.status(400).json({
+      error: 'Passwords do not match',
+    });
+  }
+
+  return Account.AccountModel.authenticate(req.session.account.username, req.body.currentPassword,
+    (err, pass) => {
+      if (err || !pass) {
+        return res.status(401).json({
+          error: 'Current Password is incorrect.',
+        });
+      }
+
+      return Account.AccountModel.generateHash(req.body.newPass, (salt, hash) => {
+        const findUser = {
+          username: `${req.session.account.username}`,
+        };
+
+        Account.AccountModel.update(findUser, { $set: { password: hash, salt } }, {}, (error) => {
+          if (error) {
+            return res.status(500).json({ error: 'Cannot update password at the moment.' });
+          }
+
+          return res.status(200).json({ redirect: '/userPage' });
+        });
+      });
+    }
+  );
+};
 
 module.exports = {
   loginPage,
@@ -119,4 +169,5 @@ module.exports = {
   signup,
   homePage,
   userPage,
+  changePassword,
 };

@@ -10,7 +10,8 @@ const router = (app) => {
   app.get('/userPage', mid.requiresLogin, controllers.Account.userPage);
   app.get('/', controllers.Account.homePage);
   app.get('/homePage', controllers.Account.homePage);
-  // app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
+  app.post('/changePassword', mid.requiresSecure, mid.requiresLogin,
+  controllers.Account.changePassword);
 };
 
 module.exports = router;

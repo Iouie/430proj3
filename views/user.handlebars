@@ -48,16 +48,13 @@
           <h4 class="modal-title">Change Password</h4>
         </div>
         <div class="modal-body">
-
-          <div class='row'>
-            <div class='col text-center'>
-              <div class="alert alert-danger" id="errorMessage" role="alert" style='display:none;'>
-              </div>
-            </div>
-          </div>
           <!-- form -->
           <form id='changePasswordForm' name='changePasswordForm' action='/changePassword' method='POST'
             class='changePasswordForm'>
+
+            <div class="alert alert-success" id="successMessage" roles="alert" style='display:none'>
+            </div>
+
             <div class='row justify-content-center'>
               <div class='form-group .col-md-3'>
                 <input class='field' id='currentPassword' type='password' name='currentPassword'
@@ -73,7 +70,7 @@
 
             <div class='row justify-content-center'>
               <div class='form-group .col-md-3'>
-                <input class='field' id='pass2' type='password' name='pass2' placeholder='Retype Password' />
+                <input class='field' id='newPass2' type='password' name='newPass2' placeholder='Retype Password' />
               </div>
             </div>
 
@@ -81,6 +78,13 @@
               <div class='col-md-3'>
                 <input id="changepasswordcsrf" type="hidden" name="_csrf" value={{csrfToken}} />
                 <button class='btn btn-outline-dark' id='changePasswordButton' type='submit'>Save Changes</button>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='col text-center'>
+                <div class="alert alert-danger" id="errorMessage" role="alert" style='display:none;'>
+                </div>
               </div>
             </div>
 

@@ -5,6 +5,10 @@ var handleError = function handleError(message) {
     $("#errorMessage").show();
 };
 
+var handlePasswordChange = function handlePasswordChange(message) {
+    $("#successMessage").text(message);
+    $("#successMessage").show();
+};
 var sendAjax = function sendAjax(action, data) {
     $.ajax({
         cache: false,
@@ -65,17 +69,20 @@ $(document).ready(function () {
     $("#changePasswordForm").on("submit", function (e) {
         e.preventDefault();
 
-        $("#errorMessage").hide();
 
-        if ($("#currentPassword").val() == '' || $("#newPass").val() == '' || $("#pass2").val() == '') {
+        if ($("#currentPassword").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == '') {
             handleError("All fields are required");
             return false;
         }
 
-        if ($("#newPass").val() !== $("#pass2").val()) {
+        if ($("#newPass").val() !== $("#newPass2").val()) {
+            
             handleError("Passwords do not match");
             return false;
         }
+
+        $("#errorMessage").hide();
+        handlePasswordChange('Password successfully changed');
 
         sendAjax($("#changePasswordForm").attr("action"), $("#changePasswordForm").serialize());
 
