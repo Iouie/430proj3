@@ -61,4 +61,24 @@ $(document).ready(function () {
 
         return false;
     });
+
+    $("#changePasswordForm").on("submit", function (e) {
+        e.preventDefault();
+
+        $("#errorMessage").hide();
+
+        if ($("#currentPassword").val() == '' || $("#newPass").val() == '' || $("#pass2").val() == '') {
+            handleError("All fields are required");
+            return false;
+        }
+
+        if ($("#newPass").val() !== $("#pass2").val()) {
+            handleError("Passwords do not match");
+            return false;
+        }
+
+        sendAjax($("#changePasswordForm").attr("action"), $("#changePasswordForm").serialize());
+
+        return false;
+    });
 });

@@ -43,3 +43,8 @@ body{
         background-position: 0 50%;
     }
 }
+
+.modal-title{
+    margin: 0 auto;
+}
+
