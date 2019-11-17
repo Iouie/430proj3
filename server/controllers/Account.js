@@ -8,6 +8,11 @@ const loginPage = (req, res) => {
   });
 };
 
+const notFoundPage = (req, res) => {
+  res.render('404', { csrfToken: req.csrfToken(),
+  });
+};
+
 const homePage = (req, res) => {
   res.render('homePage', {
     name: req.session.account,
@@ -155,12 +160,21 @@ const changePassword = (request, response) => {
           username: `${req.session.account.username}`,
         };
 
-        Account.AccountModel.update(findUser, { $set: { password: hash, salt } }, {}, (error) => {
+        Account.AccountModel.update(findUser, {
+          $set: {
+            password: hash,
+            salt,
+          },
+        }, {}, (error) => {
           if (error) {
-            return res.status(500).json({ error: 'Cannot update password at the moment.' });
+            return res.status(500).json({
+              error: 'Cannot update password at the moment.',
+            });
           }
 
-          return res.status(200).json({ redirect: '/userPage' });
+          return res.status(200).json({
+            redirect: '/userPage',
+          });
         });
       });
     }
@@ -177,4 +191,5 @@ module.exports = {
   myPage,
   userPage,
   changePassword,
+  notFoundPage,
 };

@@ -10,9 +10,6 @@ var handlePasswordChange = function handlePasswordChange(message) {
     $("#successMessage").show();
 };
 
-var getDate = function getDate() {
-      return new Date();
-  }
 
 var sendAjax = function sendAjax(action, data) {
     $.ajax({
@@ -38,9 +35,6 @@ var sendAjax = function sendAjax(action, data) {
 $(document).ready(function () {
     $("#signupForm").on("submit", function (e) {
         e.preventDefault();
-
-        getDate();
-
         $("#errorMessage").hide();
 
         if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
@@ -61,7 +55,6 @@ $(document).ready(function () {
     $("#loginForm").on("submit", function (e) {
         e.preventDefault();
 
-        getDate();
 
         $("#errorMessage").hide();
 

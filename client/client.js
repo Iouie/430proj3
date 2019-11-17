@@ -8,10 +8,6 @@ const handlePasswordChange = (message) => {
   $("#successMessage").show();
 }
 
-const getDate = () => {
-  return new Date();
-};
-
 
 const sendAjax = (action, data) => {
   $.ajax({
