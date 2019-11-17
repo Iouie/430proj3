@@ -12,21 +12,21 @@ const makerPage = (req, res) => {
 
         return res.render('user', {
             csrfToken: req.csrfToken(),
-            caloriez: docs
+            cals: docs
         });
     });
 };
 
 const makeCalories = (req, res) => {
-    if (!req.body.food) {
+    if (!req.body.title) {
         return res.status(400).json({
             error: 'Must have food name'
         });
     }
 
     const calorieData = {
-        food: req.body.food,
-        calories: req.body.calories,
+        title: req.body.title,
+        cal: req.body.cal,
         date: req.body.date,
         owner: req.session.account._id,
     };

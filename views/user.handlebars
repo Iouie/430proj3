@@ -39,44 +39,54 @@
 
 
   <div class='container-fluid' id='maker'>
-    
-              <h2> Add Food Here </h2>
+
+    <h2> Add Food Here </h2>
+
+    <div class='row'>
+      <div class='col text-center'>
+        <div class="alert alert-danger" id="errorMessage" role="alert" style='display:none;'>
+        </div>
+      </div>
+    </div>
 
     <div class='row'>
       <div class='col'>
         <section id="makeCalories">
 
           <form id="caloriesForm" name="caloriesForm" action="/maker" method="POST" class="caloriesForm">
-            <label for="foodTitle">Food: </label>
-            <input id="foodTitle" type="text" name="foodTitle" placeholder="Food Title" />
 
-            <label for="foodCalories">Calories: </label>
-            <input id="foodCalories" type="text" name="foodCalories" placeholder="Food Calories" />
+            <label for="title">Food: </label>
+            <input id="foodTitle" type="text" name="title" placeholder="Food Title" />
+
+            <label for="cal">Calories: </label>
+            <input id="foodCalories" type="text" name="cal" placeholder="Food Calories" />
 
             <label for="date">Date: </label>
             <input id="date" type="date" name="date" placeholder="Date" />
 
             <input type="hidden" name="_csrf" value={{csrfToken}} />
 
-            <input class="makeCaloriesSubmit btn btn-outline-dark" id='makeCaloriesSubmit' type="submit" value="Add Food" />
+            <input class="makeCaloriesSubmit btn btn-outline-dark" id='makeCaloriesSubmit' type="submit"
+              value="Add Food" />
           </form>
         </section>
       </div>
     </div>
-    
-    <section id="foods">
+  </div>
+
+  <section id="foods">
     <div class="food">
-      {{#if caloriez}}
-      {{#each caloriez}}
-        <h3 class="foodTitle:">Food: {{this.food}}</h3>
-        <h3 class="foodCalories">Calories: {{this.calories}}</h3>
-        <h3 class ='date'>Date: {{this.date}}</h3>
-      </div>
-      {{/each}}
-      {{else}}
-      <h3 class="emptyCalories">No Foods yet</h3>
-      {{/if}}
-    </section>
+      {{#if cals}}
+      {{#each cals}}
+      <h3 class="foodTitle:">Food: {{this.title}}</h3>
+      <h3 class="foodCalories">Calories: {{this.cal}}</h3>
+      <h3 class='date'>Date: {{this.date}}</h3>
+    </div>
+    {{/each}}
+    {{else}}
+    <h3 class="emptyCalories text-center">No Foods yet</h3>
+    {{/if}}
+  </section>
   </div>
 
   <!-- Modal -->

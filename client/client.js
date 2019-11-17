@@ -93,7 +93,7 @@ $(document).ready(() => {
     return false;
   });
 
-  $("caloriesForm").on("submit", (e) => {
+  $("#caloriesForm").on("submit", (e) => {
     e.preventDefault();
 
     $("errorMessage").hide();

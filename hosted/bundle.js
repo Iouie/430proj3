@@ -89,12 +89,12 @@ $(document).ready(function () {
         return false;
     });
 
-    $("caloriesForm").on("submit", function (e) {
+    $("#caloriesForm").on("submit", function (e) {
         e.preventDefault();
     
         $("errorMessage").hide();
     
-        if($("foodTitle").val() == '' || $("#foodCalories").val() == '' || $("#date").val() == ''){
+        if($("#foodTitle").val() == '' || $("#foodCalories").val() == '' || $("#date").val() == ''){
           handleError("All fields are required");
           return false;
         }
