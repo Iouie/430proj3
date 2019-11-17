@@ -13,7 +13,7 @@ const router = (app) => {
   app.post('/changePassword', mid.requiresSecure, mid.requiresLogin,
   controllers.Account.changePassword);
   app.get('/maker', mid.requiresLogin, controllers.Calories.makerPage);
-  app.post('/maker', mid.requiresLogin, controllers.Calories.make)
+  app.post('/maker', mid.requiresLogin, controllers.Calories.make);
 };
 
 module.exports = router;

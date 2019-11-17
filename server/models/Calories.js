@@ -36,7 +36,7 @@ const CaloriesSchema = new mongoose.Schema({
   createdData: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 CaloriesSchema.statics.toAPI = (doc) => ({
