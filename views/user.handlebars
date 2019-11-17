@@ -18,11 +18,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/userPage">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Calories</a>
-        </li>
+        {{!-- <li class="nav-item">
+          <a class="nav-link" href="/maker">Calories</a>
+        </li> --}}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -36,6 +36,48 @@
       <div class="navlink"><a href="/logout">Log out</a></div>
     </div>
   </nav>
+
+
+  <div class='container-fluid' id='maker'>
+    
+              <h2> Add Food Here </h2>
+
+    <div class='row'>
+      <div class='col'>
+        <section id="makeCalories">
+
+          <form id="caloriesForm" name="caloriesForm" action="/maker" method="POST" class="caloriesForm">
+            <label for="foodTitle">Food: </label>
+            <input id="foodTitle" type="text" name="foodTitle" placeholder="Food Title" />
+
+            <label for="foodCalories">Calories: </label>
+            <input id="foodCalories" type="text" name="foodCalories" placeholder="Food Calories" />
+
+            <label for="date">Date: </label>
+            <input id="date" type="date" name="date" placeholder="Date" />
+
+            <input type="hidden" name="_csrf" value={{csrfToken}} />
+
+            <input class="makeCaloriesSubmit btn btn-outline-dark" id='makeCaloriesSubmit' type="submit" value="Add Food" />
+          </form>
+        </section>
+      </div>
+    </div>
+    
+    <section id="foods">
+    <div class="food">
+      {{#if caloriez}}
+      {{#each caloriez}}
+        <h3 class="foodTitle:">Food: {{this.food}}</h3>
+        <h3 class="foodCalories">Calories: {{this.calories}}</h3>
+        <h3 class ='date'>Date: {{this.date}}</h3>
+      </div>
+      {{/each}}
+      {{else}}
+      <h3 class="emptyCalories">No Foods yet</h3>
+      {{/if}}
+    </section>
+  </div>
 
   <!-- Modal -->
   <div class="modal fade" id="changePassword" role="dialog">
@@ -97,5 +139,6 @@
 
       <script src="/assets/bundle.js"></script>
 </body>
+
 
 </html>

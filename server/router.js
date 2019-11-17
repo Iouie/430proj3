@@ -8,10 +8,12 @@ const router = (app) => {
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
   app.get('/userPage', mid.requiresLogin, controllers.Account.userPage);
-  app.get('/', controllers.Account.homePage);
-  app.get('/homePage', controllers.Account.homePage);
+  app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.homePage);
+  app.get('/homePage', mid.requiresSecure, controllers.Account.homePage);
   app.post('/changePassword', mid.requiresSecure, mid.requiresLogin,
   controllers.Account.changePassword);
+  app.get('/maker', mid.requiresLogin, controllers.Calories.makerPage);
+  app.post('/maker', mid.requiresLogin, controllers.Calories.make)
 };
 
 module.exports = router;

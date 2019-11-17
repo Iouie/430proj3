@@ -92,4 +92,19 @@ $(document).ready(() => {
 
     return false;
   });
+
+  $("caloriesForm").on("submit", (e) => {
+    e.preventDefault();
+
+    $("errorMessage").hide();
+
+    if($("foodTitle").val() == '' || $("#foodCalories").val() == '' || $("#date").val() == ''){
+      handleError("All fields are required");
+      return false;
+    }
+
+    sendAjax($("#caloriesForm").attr("action"),$("#caloriesForm").serialize());
+
+    return false;
+  });
 });
