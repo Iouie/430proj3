@@ -8,6 +8,11 @@ const handlePasswordChange = (message) => {
   $("#successMessage").show();
 }
 
+const getDate = () => {
+  return new Date();
+};
+
+
 const sendAjax = (action, data) => {
   $.ajax({
     cache: false,
@@ -31,6 +36,7 @@ const sendAjax = (action, data) => {
 $(document).ready(() => {
   $("#signupForm").on("submit", (e) => {
     e.preventDefault();
+
 
     $("#errorMessage").hide();
 
@@ -95,6 +101,7 @@ $(document).ready(() => {
 
   $("#caloriesForm").on("submit", (e) => {
     e.preventDefault();
+
 
     $("errorMessage").hide();
 

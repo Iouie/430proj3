@@ -14,6 +14,12 @@ const homePage = (req, res) => {
   });
 };
 
+const myPage = (req, res) => {
+  res.render('myPage', {
+    name: req.session.account,
+  });
+};
+
 const userPage = (req, res) => {
   res.render('user', {
     csrfToken: req.csrfToken,
@@ -56,7 +62,7 @@ const login = (request, response) => {
     req.session.account = Account.AccountModel.toAPI(account);
 
     return res.json({
-      redirect: '/userPage',
+      redirect: '/myPage',
     });
   });
 };
@@ -168,6 +174,7 @@ module.exports = {
   signupPage,
   signup,
   homePage,
+  myPage,
   userPage,
   changePassword,
 };

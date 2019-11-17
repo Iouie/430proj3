@@ -36,7 +36,7 @@ const makeCalories = (req, res) => {
   const caloriePromise = newCalories.save();
 
   caloriePromise.then(() => res.json({
-    redirect: '/userPage',
+    redirect: '/maker',
   }));
 
   caloriePromise.catch((err) => {

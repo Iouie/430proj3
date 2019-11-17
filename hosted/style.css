@@ -45,8 +45,18 @@ body{
     }
 }
 
-.modal-title{
+.modal-title, #foods{
     margin: 0 auto;
     margin-left: 25px;
 }
+
+.top-buffer { margin-top:25px; }
+
+img.animated-gif{
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+    height: 80%;
+  }
+
 

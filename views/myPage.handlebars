@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <title>CALORIES TRACKER</title>
+  <title>CALORIE TRACKER</title>
 </head>
 
 <body>
@@ -35,71 +35,9 @@
       <div class="navlink"><a href="/logout">Log out</a></div>
     </div>
   </nav>
-
-
-  <!-- Food List -->
-
-  <div class='row'>
-    <div class='container-fluid' id='maker'>
-
-      <h2> Add Food Here </h2>
-
-      <div class='row'>
-        <div class='col text-center'>
-          <div class="alert alert-danger" id="errorMessage" role="alert" style='display:none;'>
-          </div>
-        </div>
-      </div>
-
-      <div class='col'>
-        <section id="makeCalories">
-
-          <form id="caloriesForm" name="caloriesForm" action="/maker" method="POST" class="caloriesForm">
-
-            <label for="title">Food: </label>
-            <input id="foodTitle" type="text" name="title" placeholder="Food Title" />
-
-            <label for="cal">Calories: </label>
-            <input id="foodCalories" type="text" name="cal" placeholder="Food Calories" value=1 />
-
-            <label for="date">Date: </label>
-            <input id="date" type="date" name="date" placeholder="Date" value={{ getDate }} />
-
-            <input type="hidden" name="_csrf" value={{csrfToken}} />
-
-            <input class="makeCaloriesSubmit btn btn-outline-dark" id='makeCaloriesSubmit' type="submit"
-              value="Add Food" />
-
-            <section id="foods">
-              {{#if foods}}
-              {{#each foods}}
-              <div class='row'>
-
-                <div class="col-sm">
-                  <h3 class="foodTitle:">Food: {{this.title}}</h3>
-                </div>
-
-                <div class='col-sm'>
-                  <h3 class="foodCalories">Calories: {{this.cal}}</h3>
-                </div>
-
-                <div class='col-sm'>
-                  <h3 class='date'>Date: {{this.date}}</h3>
-                </div>
-                <div class='row top-buffer'></div>
-              </div>
-              {{/each}}
-              {{else}}
-              <h3 class="emptyCalories text-center">No Foods yet</h3>
-              {{/if}}
-            </section>
-
-          </form>
-        </section>
-      </div>
-    </div>
-  </div>
-  </div>
+  
+  <h2>TRACK YOUR CALORIES BEFORE IT'S TOO LATE!</h2>
+<img class='animated-gif' src='./assets/img/giphy.gif'>
 
 
   <!-- Modal -->

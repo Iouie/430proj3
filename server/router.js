@@ -10,6 +10,7 @@ const router = (app) => {
   app.get('/userPage', mid.requiresLogin, controllers.Account.userPage);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.homePage);
   app.get('/homePage', mid.requiresSecure, controllers.Account.homePage);
+  app.get('/myPage', mid.requiresSecure, mid.requiresLogin, controllers.Account.myPage);
   app.post('/changePassword', mid.requiresSecure, mid.requiresLogin,
   controllers.Account.changePassword);
   app.get('/maker', mid.requiresLogin, controllers.Calories.makerPage);
