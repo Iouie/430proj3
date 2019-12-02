@@ -73,6 +73,7 @@ const handleCalories = (e) => {
 
 const ChangePassword = (props) => {
     return (
+      <div>
         <div class="modal fade" id="changePassword" role="dialog">
         <div class="modal-dialog">
     
@@ -126,6 +127,7 @@ const ChangePassword = (props) => {
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
+          </div>
           </div>
           </div>
           </div>
