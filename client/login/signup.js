@@ -77,11 +77,25 @@ const SignupForm = (props) => {
     );
 };
 
-const setup = function(csrf){
+// create signup view in center of page
+const createSignupWindow = (csrf) => {
     ReactDOM.render(
-      <SignupForm csrf={csrf} />, document.querySelector('#signup')
+        <SignupWindow csrf={csrf} />,
+        document.querySelector('#signup')
     );
-  };
+};
+
+const setup = function(csrf){
+
+    const signupButton = document.querySelector('#signupButton');
+
+
+    signupButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        createSignupWindow(csrf);
+        return false;
+    });
+};
 
   const getToken = () => {
     sendAjax('GET', '/getToken', null, (result) => {

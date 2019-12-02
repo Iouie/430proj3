@@ -15,6 +15,7 @@ const router = (app) => {
   controllers.Account.changePassword);
   app.get('/maker', mid.requiresLogin, controllers.Calories.makerPage);
   app.post('/maker', mid.requiresLogin, controllers.Calories.make);
+  app.get('/getToken', mid.requiresSecure, controllers.Account.getToken);
   app.get('/*', controllers.Account.notFoundPage);
 };
 

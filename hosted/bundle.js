@@ -52,21 +52,21 @@ $(document).ready(function () {
         return false;
     });
 
-    $("#loginForm").on("submit", function (e) {
-        e.preventDefault();
+    // $("#loginForm").on("submit", function (e) {
+    //     e.preventDefault();
 
 
-        $("#errorMessage").hide();
+    //     $("#errorMessage").hide();
 
-        if ($("#user").val() == '' || $('#pass').val() == '') {
-            handleError("All fields required");
-            return false;
-        }
+    //     if ($("#user").val() == '' || $('#pass').val() == '') {
+    //         handleError("All fields required");
+    //         return false;
+    //     }
 
-        sendAjax($("#loginForm").attr("action"), $("#loginForm").serialize());
+    //     sendAjax($("#loginForm").attr("action"), $("#loginForm").serialize());
 
-        return false;
-    });
+    //     return false;
+    // });
 
     $("#changePasswordForm").on("submit", function (e) {
         e.preventDefault();

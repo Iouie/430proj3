@@ -71,10 +71,22 @@ const handleLogin = (e) => {
      );
  };
 
+ const createLoginWindow = (csrf) => {
+  ReactDOM.render(
+      <LoginWindow csrf={csrf} />,
+      document.querySelector('#login')
+  );
+};
+
  const setup = function(csrf){
-    ReactDOM.render(
-      <LoginForm csrf={csrf} />, document.querySelector('#login')
-    );
+  const loginButton = document.querySelector('#loginButton');
+
+  loginButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    createLoginWindow();
+    return false;
+});
+createLoginWindow(csrf);
   };
 
   const getToken = () => {
