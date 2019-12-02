@@ -1,33 +1,33 @@
-const handleError = (message) => {
-  $("#errorMessage").text(message);
-  $("#errorMessage").show();
-}
+// const handleError = (message) => {
+//   $("#errorMessage").text(message);
+//   $("#errorMessage").show();
+// }
 
-const handlePasswordChange = (message) => {
-  $("#successMessage").text(message);
-  $("#successMessage").show();
-}
+// const handlePasswordChange = (message) => {
+//   $("#successMessage").text(message);
+//   $("#successMessage").show();
+// }
 
 
-const sendAjax = (action, data) => {
-  $.ajax({
-    cache: false,
-    type: "POST",
-    url: action,
-    data: data,
-    dataType: "json",
-    success: (result, status, xhr) => {
-      $("#errorMessage").hide();
+// const sendAjax = (action, data) => {
+//   $.ajax({
+//     cache: false,
+//     type: "POST",
+//     url: action,
+//     data: data,
+//     dataType: "json",
+//     success: (result, status, xhr) => {
+//       $("#errorMessage").hide();
 
-      window.location = result.redirect;
-    },
-    error: (xhr, status, error) => {
-      const messageObj = JSON.parse(xhr.responseText);
+//       window.location = result.redirect;
+//     },
+//     error: (xhr, status, error) => {
+//       const messageObj = JSON.parse(xhr.responseText);
 
-      handleError(messageObj.error);
-    }
-  });
-}
+//       handleError(messageObj.error);
+//     }
+//   });
+// }
 
 $(document).ready(() => {
   $("#signupForm").on("submit", (e) => {
@@ -88,7 +88,7 @@ $(document).ready(() => {
       return false;
     }
 
-    handlePasswordChange("Password successfully changed");
+    handlePass("Password successfully changed");
 
     sendAjax($("#changePasswordForm").attr("action"), $("#changePasswordForm").serialize());
 
