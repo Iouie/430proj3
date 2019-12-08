@@ -3,30 +3,44 @@
     padding: 0;
 }
 
-#title {
-    font-size: 10rem;
-    font-family: 'Work Sans', sans-serif;
+
+html,
+body {
+    font-family: 'Sulphur Point', sans-serif;
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+    padding: 0;
+    width: 100%;
+}
+
+nav {
+    background-color: silver;
+    height: 50px;
+    width: 100%;
+}
+
+.logo {
+    border-radius: 4px;
+    float: left;
+    padding: 2px;
+    width: 50%;
+    height: 10px;
+}
+
+.navlink {
+    color: black;
+    cursor: pointer;
+    float: right;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+#text{
     text-align: center;
 }
 
 
-img {
-    border-radius: 7%;
-}
-
-a,
-#signupButton,
-#loginButton {
-    color: black;
-}
-
-.top-buffer {
-    margin-top: 20px;
-}
-
-.top-buffer2 {
-    margin-top: 250px;
-}
 
 
 /* https://www.youtube.com/watch?v=fBRzD6dwJfw */
@@ -54,28 +68,4 @@ h2 {
     100% {
         background-position: 0 50%;
     }
-}
-
-.modal-title,
-#foods {
-    margin: 0 auto;
-    margin-left: 25px;
-}
-
-.top-buffer {
-    margin-top: 25px;
-}
-
-img.animated-gif {
-    display: block;
-    margin: 0 auto;
-    width: 70%;
-    height: 80%;
-}
-
-img.animated-gif2 {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    height: 95%;
 }

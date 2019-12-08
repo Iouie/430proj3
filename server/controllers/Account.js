@@ -9,32 +9,7 @@ const loginPage = (req, res) => {
 };
 
 const notFoundPage = (req, res) => {
-  res.render('404', { csrfToken: req.csrfToken(),
-  });
-};
-
-const homePage = (req, res) => {
-  res.render('homePage', {
-    name: req.session.account,
-  });
-};
-
-const myPage = (req, res) => {
-  res.render('myPage', {
-    name: req.session.account,
-  });
-};
-
-const userPage = (req, res) => {
-  res.render('user', {
-    csrfToken: req.csrfToken,
-    name: req.session.account.username,
-  });
-};
-
-const signupPage = (req, res) => {
-  res.render('signup', {
-    csrfToken: req.csrfToken(),
+  res.render('notFound', { csrfToken: req.csrfToken(),
   });
 };
 
@@ -195,14 +170,10 @@ const getToken = (request, response) => {
 
 module.exports = {
   loginPage,
-  login,
-  logout,
-  signupPage,
-  signup,
-  homePage,
-  myPage,
-  userPage,
-  changePassword,
   notFoundPage,
-  getToken,
-};
+  logout,
+  login,
+  signup,
+  changePassword,
+  getToken
+}

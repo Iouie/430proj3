@@ -7,25 +7,40 @@ let CaloriesModel = {};
 // mongoose.Types.ObjectID converts the string ID
 // to a real mongo ID
 const convertId = mongoose.Types.ObjectId;
-const setFood = (title) => _.escape(title).trim();
+const setFood = (name) => _.escape(name).trim();
 
 const CaloriesSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
     required: true,
     trim: true,
     set: setFood,
   },
 
-  cal: {
+  cals: {
     type: Number,
     min: 1,
     required: true,
   },
 
-  date: {
-    type: String,
+  carbs: {
+    type: Number,
+    min: 0,
+    required: true,
   },
+
+  protein: {
+    type: Number,
+    min: 1,
+    required: true,
+  },
+
+  fat: {
+    type: Number,
+    min: 1,
+    required: true,
+  },
+
 
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -40,9 +55,11 @@ const CaloriesSchema = new mongoose.Schema({
 });
 
 CaloriesSchema.statics.toAPI = (doc) => ({
-  title: doc.title,
-  cal: doc.cal,
-  date: doc.date,
+  name: doc.name,
+  cals: doc.cals,
+  carbs: doc.carbs,
+  protein: doc.protein,
+  fat: doc.fat,
 });
 
 CaloriesSchema.statics.findByOwner = (ownerId, callback) => {
@@ -50,7 +67,7 @@ CaloriesSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return CaloriesModel.find(search).select('title cal date').exec(callback);
+  return CaloriesModel.find(search).select('name cals carbs protein fat').exec(callback);
 };
 
 CaloriesModel = mongoose.model('Calories', CaloriesSchema);
