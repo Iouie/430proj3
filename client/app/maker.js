@@ -82,7 +82,6 @@ const DeleteFoodForm = (props) => {
   );
 }
 
-
 // create list of Foods
 const FoodList = function (props) {
   if(props.foods.length == 0){
@@ -139,6 +138,7 @@ const setup = function(csrf) {
       loadFoodsFromServer();
       handleChangePassword(csrf);
       handleUpgradeClick();
+      handleVideoClicks();
 
   }
 };

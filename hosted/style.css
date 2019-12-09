@@ -43,7 +43,7 @@ nav {
 
 
 
-.navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active, #upgrade {
+.navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active, #upgrade, #vids {
     color: black;
     text-decoration: none;
     padding: 5px;
@@ -52,11 +52,8 @@ nav {
     transition: background-color 0.4s ease;
 }
 
-#text{
-    text-align: center;
-}
 
-.mainForm, h1{
+.mainForm, h1, #text, #videoTitle, .motivations{
     text-align: center;
 }
 
@@ -116,6 +113,18 @@ nav {
     overflow: hidden;
     padding: 10px 10px 0px 10px;
     width: 20rem; 
+}
+
+.motivations{
+    border: 2px solid black;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    overflow: hidden;
+    padding: 10px 10px 0px 10px;
+    width: 100%; 
 }
 
 .formSubmit, .makeFoodSubmit {

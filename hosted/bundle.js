@@ -237,6 +237,7 @@ var setup = function setup(csrf) {
         loadFoodsFromServer();
         handleChangePassword(csrf);
         handleUpgradeClick();
+        handleVideoClicks();
 };
 
 // get csrf token
@@ -381,6 +382,13 @@ var handleChangePassword = function handleChangePassword(csrf) {
 // remove ads
 'use strict';
 
+// function use to remove ads
+
+function RemoveAds(e) {
+    e.preventDefault();
+    document.querySelector('#ad').style.display = "none";
+}
+
 
 var UpgradeAccount = function UpgradeAccount(props) {
     $('#calorieMessage').animate({ height: 'hide' }, 350);
@@ -394,7 +402,9 @@ var UpgradeAccount = function UpgradeAccount(props) {
         ),
         React.createElement(
             'button',
-            { className: 'upgradeButton' },
+            { id: 'removeAds',
+            className: 'upgradeButton', 
+            onClick: RemoveAds },
             'Upgrade'
         )
     );
@@ -452,5 +462,106 @@ var handleUpgradeClick = function handleUpgradeClick() {
     upgrade.addEventListener('click', function (e) {
         e.preventDefault();
         createUpgradeView();
+    });
+};
+
+// motivation video
+'use strict';
+
+var MotivationContainer = function MotivationContainer(props) {
+    $('#calorieMessage').animate({height: 'hide'}, 350);
+
+    if (props.motivations.length === 0) {
+        return React.createElement(
+            'div',
+            null,
+            'No Motivation videos yet!'
+        );
+    }
+    var motivationList = props.motivations.map(function (motivation) {
+        return React.createElement(
+            'div',
+            { className: 'motivations', key: motivation.name },
+            React.createElement(
+                'p',
+                { id: 'videoTitle' },
+                'Name: ',
+                 motivation.name
+                ),
+            React.createElement(
+                'p',
+                { id: 'videoUrl' },
+                'URL: ',
+                motivation.url
+                ),
+            React.createElement(
+                'p',
+                { id: 'videoDesc' },
+                'Description: ',
+                motivation.description,
+                    ),
+        );
+            
+    });
+    return React.createElement(
+        'div',
+        null,
+        motivationList
+    );
+};
+
+var loadVideos = function loadVideos(){
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', '/getVideos');
+
+    var setVideos = function setVideos() {
+        var videoResponse = JSON.parse(xhr.response);
+            ReactDOM.render(React.createElement(MotivationContainer, { motivations: videoResponse }), document.getElementById('foods'));
+    };
+
+    xhr.onload = setVideos;
+    xhr.send();
+};
+
+var VideoTitle = function VideoTitle(props) {
+    return React.createElement(
+        'h3',
+        { id: 'videoTitle' },
+        'Videos to Motivate'
+    );
+};
+
+var Nothing = function Nothing(props){
+    return React.createElement(
+        'div'
+    );
+};
+
+var createVideoTitle = function createVideoTitle() {
+        ReactDOM.render(React.createElement(VideoTitle, null), document.querySelector('#makeFood'));
+};
+
+var createNothing = function createNothing(){
+    ReactDOM.render(React.createElement(Nothing, null), document.querySelector('#deleteFood'));
+};
+
+var createVideoContainer = function createVideoContainer() {
+        ReactDOM.render(React.createElement(MotivationContainer, { motivations: [] }), document.getElementById('foods'));
+
+    loadVideos();
+};
+var createVideoViews = function createVideoViews() {
+    createVideoTitle();
+    createVideoContainer();
+    createNothing();
+};
+
+var handleVideoClicks = function handleVideoClicks() {
+    var vidClicks = document.querySelector('#vids');
+
+    vidClicks.addEventListener('click', function (e) {
+        e.preventDefault();
+        createVideoViews();
     });
 };

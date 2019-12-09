@@ -11,6 +11,8 @@ const UpgradeAccount = (props) => {
     );
 };
 
+// function to remove ads
+
 function RemoveAds(e) {
     e.preventDefault();
     document.querySelector('#ad').style.display = "none";
