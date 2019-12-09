@@ -342,17 +342,30 @@ var PassTitle = function PassTitle(props) {
     );
 };
 
+var FoodTitle = function FoodTitle(props) {
+    return React.createElement(
+        'div',
+        {id: 'sup' },
+        ''
+    );
+};
+
 var createPassTitle = function createPassTitle() {
         ReactDOM.render(React.createElement(PassTitle, null), document.querySelector('#makeFood'));
 };
 
 var createChangePasswordForm = function createChangePasswordForm(csrf) {
-        ReactDOM.render(React.createElement(ChangePassword, { csrf: csrf }), document.querySelector('#foods'));
+        ReactDOM.render(React.createElement(ChangePassword, { csrf: csrf }), document.querySelector('#deleteFood'));
 };
+
+var createFoodTitle = function createFoodTitle() {
+    ReactDOM.render(React.createElement(FoodTitle, null), document.querySelector("#foods"));
+}
 
 var createChangePasswordView = function createChangePasswordView(csrf) {
     createPassTitle();
     createChangePasswordForm(csrf);
+    createFoodTitle();
 };
 
 var handleChangePassword = function handleChangePassword(csrf) {

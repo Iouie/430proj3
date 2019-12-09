@@ -47,6 +47,12 @@ const PassTitle = (props) => {
     );
 };
 
+const FoodTitle = (props) => {
+    return(
+        <div id='sup'></div>
+    );
+};
+
 const createPassTitle = () => {
         ReactDOM.render(
             <PassTitle />,
@@ -57,13 +63,21 @@ const createPassTitle = () => {
 const createChangePasswordForm = (csrf) => {
         ReactDOM.render(
             <ChangePassword csrf={csrf} />,
-            document.querySelector('#foods')
+            document.querySelector('#deleteFood')
         );
 };
 
+const createFoodTitle = () => {
+    ReactDom.render(
+        <FoodTitle />,
+        document.querySelector('#foods')
+    );
+}
+
 const createChangePasswordView = (csrf) => {
     createPassTitle();
-	createChangePasswordForm(csrf);
+    createChangePasswordForm(csrf);
+    createFoodTitle();
 };
 
 const handleChangePassword = (csrf) => {
