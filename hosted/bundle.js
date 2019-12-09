@@ -391,7 +391,6 @@ function RemoveAds(e) {
 
 
 var UpgradeAccount = function UpgradeAccount(props) {
-    $('#calorieMessage').animate({ height: 'hide' }, 350);
     return React.createElement(
         'div',
         { id: 'upgradeContent' },
