@@ -4,10 +4,13 @@ const _ = require('underscore');
 
 let CaloriesModel = {};
 
+
 // mongoose.Types.ObjectID converts the string ID
 // to a real mongo ID
 const convertId = mongoose.Types.ObjectId;
 const setFood = (name) => _.escape(name).trim();
+
+
 
 const CaloriesSchema = new mongoose.Schema({
   name: {
@@ -41,7 +44,6 @@ const CaloriesSchema = new mongoose.Schema({
     required: true,
   },
 
-
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
@@ -68,6 +70,20 @@ CaloriesSchema.statics.findByOwner = (ownerId, callback) => {
   };
 
   return CaloriesModel.find(search).select('name cals carbs protein fat').exec(callback);
+};
+
+CaloriesSchema.statics.findByName = (name, callback) => {
+  const search = {
+    name,
+  };
+  return CaloriesModel.find(search).exec(callback);
+};
+
+CaloriesSchema.statics.removeAllByName = (foodName, callback) => {
+  const search = {
+    name: foodName,
+  };
+  return CaloriesModel.deleteMany(search, callback);
 };
 
 CaloriesModel = mongoose.model('Calories', CaloriesSchema);

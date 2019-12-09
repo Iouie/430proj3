@@ -20,8 +20,8 @@ const makerPage = (req, res) => {
 
 const makeCalories = (req, res) => {
   if (!req.body.name || !req.body.cals
-    || req.body.carbs || !req.body.protein
-    || req.body.fat) {
+    || !req.body.carbs || !req.body.protein
+    || !req.body.fat) {
     return res.status(400).json({
       error: 'All fields are required',
     });
@@ -48,7 +48,7 @@ const makeCalories = (req, res) => {
     console.log(err);
     if (err.code === 11000) {
       return res.status(400).json({
-        error: 'Try naming your food differently',
+        error: 'It already exists',
       });
     }
 
@@ -59,21 +59,6 @@ const makeCalories = (req, res) => {
 
   return caloriePromise;
 };
-
-// const deleteFood = (req, res) => {
-//   if (!req.body.id) {
-//     return res.status(400).json({ error: 'Food id is required to delete.' });
-//   }
-
-//   return Calories.CaloriesModel.deleteById(req.body.id, (err) => {
-//     if (err) {
-//       console.log(err);
-//       return res.status(500).json({ error: 'An error ocurred.' });
-//     }
-
-//     return res.status(200).json({ msg: 'Food deleted successfully.' });
-//   });
-// };
 
 const getFoods = (request, response) => {
   const req = request;
@@ -89,8 +74,29 @@ const getFoods = (request, response) => {
   });
 };
 
+const deleteFood = (req, res) => {
+  const name = `${req.body.name}`;
+  if (!name) {
+    return res.status(400).json({
+      error: 'Name required',
+    });
+  }
+
+  return Calories.CaloriesModel.findByName(name, (err, docs) => {
+    if (err || docs.length === 0) {
+      return res.status(400).json({ error: 'No Food exists' });
+    }
+    return Calories.CaloriesModel.removeAllByName(name, (error) => {
+      if (error) {
+        return res.status(400).json({ error: 'an error occured' });
+      }
+      return getFoods(req, res);
+    });
+  });
+};  
+
 
 module.exports.makerPage = makerPage;
 module.exports.make = makeCalories;
 module.exports.getFoods = getFoods;
-// module.exports.deleteFood = deleteFood;
+module.exports.deleteFood = deleteFood;

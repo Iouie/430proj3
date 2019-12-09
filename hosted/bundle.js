@@ -5,18 +5,34 @@ var handleCalories = function handleCalories(e) {
 
     $('#calorieMessage').animate({ height: 'hide' }, 350);
 
-    if($("#foodName").val() == '' || $("#foodCal").val() == '' || $("#foodCarbs").val() == ''
-    || $("#foodProtein").val() == '' || $("#foodFat").val() == ''){
+    if($("#foodName").val() === '' || $("#foodCal").val() === '' || $("#foodCarbs").val() === ''
+    || $("#foodProtein").val() === '' || $("#foodFat").val() === ''){
         handleError('All fields are required');
         return false;
     }
 
-    // sendAjax('POST', $('#foodForm').attr('action'), $('#foodForm').serialize(), function () {
-    //     loadFoodsFromServer();
-    // });
-
-    return false;
+    sendAjax('POST', $('#foodForm').attr('action'), $('#foodForm').serialize(), function () {
+        loadFoodsFromServer();
+    });
 };
+
+var deleteFood = function deleteFood(e) {
+    e.preventDefault();
+
+    $('#calorieMessage').animate({
+        height: 'hide'
+    }, 350);
+
+    if ($('#delFoodName').val() === '') {
+        handleError('Name is empty');
+        return false;
+    }
+
+    sendAjax('POST', $('#delFoodForm').attr('action'), $('#delFoodForm').serialize(), function () {
+        loadFoodsFromServer();
+    });
+};
+
 
 var FoodForm = function FoodForm(props) {
      return React.createElement(
@@ -63,13 +79,58 @@ var FoodForm = function FoodForm(props) {
                         { htmlFor: 'fat' },
                         'Fat: '
                     ),
-                    React.createElement('input', { id: 'foodFat', type: 'text', name: 'fat', placeholder: 'Fat' }),
+                    React.createElement('input', { id: 'foodProtein', type: 'text', name: 'fat', placeholder: 'Fat' }),
 
                     React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
                     React.createElement('input', { className: 'makeFoodSubmit', type: 'submit', value: 'Add Food' })
                 )
      );
 };
+
+var DeleteFoodForm = function DeleteFoodForm(props) {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            'Delete Food Name:'
+        ),
+        React.createElement(
+            'form', {
+                id: 'delFoodForm',
+                name: 'delFoodForm',
+                onSubmit: deleteFood,
+                action: '/deleteFood',
+                method: 'POST',
+                className: 'delFoodForm'
+            },
+            React.createElement(
+                'label', {
+                    htmlFor: 'name'
+                },
+                'Name:'
+            ),
+            React.createElement('input', {
+                id: 'delFoodName',
+                type: 'text',
+                name: 'name',
+                placeholder: 'Food Name'
+            }),
+            React.createElement('input', {
+                type: 'hidden',
+                name: '_csrf',
+                value: props.csrf
+            }),
+            React.createElement('input', {
+                className: 'makeFoodSubmit',
+                type: 'submit',
+                value: 'Delete'
+            })
+        )
+    );
+};
+
 
 var FoodList = function FoodList(props) {
     if (props.foods.length === 0) {
@@ -86,15 +147,14 @@ var FoodList = function FoodList(props) {
 
     var foodNodes = props.foods.map(function (food) {
         return React.createElement(
-            'div',
-            { 
-                key: food._id, 
-                className: 'food' 
+            'div', {
+                key: food._id,
+                className: 'food'
             },
-            React.createElement(
+        React.createElement(
                 'h3',
                 { className: 'foodName' },
-                ' ',
+                ' Name: ',
                 food.name,
                 ' '
             ),
@@ -150,12 +210,7 @@ var FoodList = function FoodList(props) {
                     ' ',
                     food.fat,
                     ' '
-                ),
-            React.createElement(
-                'span',
-                { className: 'foodId' },
-                food._id
-            )
+                )
         );
     });    
 
@@ -174,6 +229,8 @@ var loadFoodsFromServer = function loadFoodsFromServer() {
 
 var setup = function setup(csrf) {
         ReactDOM.render(React.createElement(FoodForm, { csrf: csrf }), document.querySelector('#makeFood'));
+
+        ReactDOM.render(React.createElement(DeleteFoodForm, { csrf: csrf }), document.querySelector("#deleteFood"));
 
         ReactDOM.render(React.createElement(FoodList, { foods: [] }), document.querySelector('#foods'));
 

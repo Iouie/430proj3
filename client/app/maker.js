@@ -3,8 +3,8 @@ const HandleCalories = (e) => {
 
   $('#calorieMessage').animate({height:'hide'}, 350);
 
-    if($("#foodName").val() == '' || $("#foodCal").val() == '' || $("#foodCarbs").val() == ''
-    || $("#foodProtein").val() == '' || $("#foodFat").val() == ''){
+    if($("#foodName").val() === '' || $("#foodCal").val() === '' || $("#foodCarbs").val() === ''
+    || $("#foodProtein").val() === '' || $("#foodFat").val() === ''){
     handleError("All fields are required");
     return false;
   }
@@ -17,14 +17,21 @@ const HandleCalories = (e) => {
 };
 
 
-// const deleteFood = (e) => {
-// 	const id = e.target.parentElement.querySelector('.foodid').innerText;
-// 	const _csrf = document.querySelector('input[name="_csrf"]').value;
-	
-// 	sendAjax('DELETE', '/deleteFood', {id, _csrf}, data => {
-// 		loadFoodsFromServer();
-// 	});
-// };
+const deleteFood = (e) => {
+  e.preventDefault();
+
+  $('#calorieMessage').animate({ height: 'hide' }, 350);
+
+  if ($('#delFoodName').val() === '') {
+    handleError('Food name is required');
+    return false;
+  }
+
+  sendAjax('POST', $('#delFoodForm').attr('action'), $('#delFoodForm').serialize(), function() {
+      loadFoodsFromServer();
+  });
+
+};
 
 const FoodForm = (props) => {
   return (
@@ -56,6 +63,25 @@ const FoodForm = (props) => {
   );
 }
 
+const DeleteFoodForm = (props) => {
+  return (
+      <div>
+          <h1>Delete Food Name Here:</h1>
+          <form id="delFoodForm"
+              name="delFoodForm"
+              onSubmit={deleteFood}
+              action='/deleteFood'
+              method='POST'
+              className='delFoodForm'>
+              <label htmlFor="name">Name:</label>
+              <input id="delFoodName" type="text" name="name" placeholder="Food Name" />
+              <input type="hidden" name="_csrf" value={props.csrf} />
+              <input className="makeFoodSubmit" type="submit" value="Delete" />
+          </form>
+      </div>
+  );
+}
+
 
 // create list of Foods
 const FoodList = function (props) {
@@ -69,7 +95,7 @@ const FoodList = function (props) {
 
   const foodNodes = props.foods.map(function(food) {
     return(
-        <div key={food._id} className="domfooo">
+        <div key={food._id} className="food">
             <h3 className="foodName">Name: {food.name} </h3>
             <h3 className="foodCal">Calories: {food.cals} </h3>
             <h3 className="foodCarbs"> Carbs: {food.carbs} </h3>
@@ -81,35 +107,10 @@ const FoodList = function (props) {
 
 return(
     <div className="foodList">
-        {foodNode}
+        {foodNodes}
     </div>
 );
 };
-
-//   const foodNodes = props.foods.sort(function(a,b){
-//     return a.name.localeCompare(b.name);
-// })
-// .map(function(food) {
-//     return (
-//         <div key={food._id} className='food'>
-//             <h3 className='foodName'> {food.name} </h3>
-//                 <p className='foodCal'> <strong>Calories:</strong> {food.cals} </p>
-//                 <p className='foodCarbs'> <strong>Carbs:</strong> {food.carbs} </p>
-//                 <p className='foodProtein'> <strong>Protein:</strong> {food.protein} </p>
-//                 <p className='foodFat'> <strong>Fat:</strong> {food.fat} </p>
-//             <span className='foodId'>{food._id}</span>
-//         </div>
-//     );
-// });
-
-// return (
-//   <div className='foodList'>
-//       {foodNodes}
-//       <p className='totalCount'>{props.foods.length} foods</p>
-//   </div>
-// );
-};
-
 
 const loadFoodsFromServer = () => {
   sendAjax('GET', '/getFoods', null, (data) => {
@@ -126,6 +127,10 @@ const setup = function(csrf) {
       ReactDOM.render(
           <FoodForm csrf={csrf} />, document.querySelector('#makeFood')
       );
+
+      ReactDOM.render(
+        <DeleteFoodForm csrf={csrf} />, document.querySelector("#deleteFood")
+    );
   
       ReactDOM.render(
           <FoodList foods={[]} />, document.querySelector('#foods')

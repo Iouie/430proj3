@@ -73,7 +73,7 @@ nav {
     font-size: 1.2em;
 }
 
-.foodForm{
+.foodForm, .delFoodForm{
     text-align: center;
 }
 .foodForm label{
@@ -89,6 +89,18 @@ nav {
 
 #pageTitle{
     text-align: center;
+}
+
+.food{
+    border: 2px solid black;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    overflow: hidden;
+    padding: 10px 10px 0px 10px;
+    width: 20rem; 
 }
 
 .formSubmit, .makeFoodSubmit {
