@@ -11,7 +11,6 @@ const convertId = mongoose.Types.ObjectId;
 const setFood = (name) => _.escape(name).trim();
 
 
-
 const CaloriesSchema = new mongoose.Schema({
   name: {
     type: String,

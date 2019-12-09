@@ -4,9 +4,11 @@ const UpgradeAccount = (props) => {
     $('#calorieMessage').animate({height:'hide'}, 350);
 
     return (
+        <div>
         <div id="upgradeContent">
             <h3>Upgrade your account to get rid of ads!</h3>
             <button className="upgradeButton" onClick={RemoveAds}>Upgrade</button>
+        </div>
         </div>
     );
 };

@@ -93,35 +93,35 @@ const deleteFood = (req, res) => {
       return getFoods(req, res);
     });
   });
-};  
+};
 
 
 const getVideos = (req, res) => {
   res.json([
     { name: 'How to Make Eating unbelievably easy',
       url: 'https://www.youtube.com/watch?v=Q4yUlJV31Rk',
-      description: 'Summary of Luke Darward and how he ate healthy'
+      description: 'Summary of Luke Darward and how he ate healthy',
     },
-    { 
+    {
       name: 'Diets & Healthy Eating',
       url: 'https://www.youtube.com/watch?v=9Nkl5TY4tmc',
-      description: 'Short video on how to eat healthy'
+      description: 'Short video on how to eat healthy',
     },
-      {
-        name: 'How to stick to your healthy eating goals',
-        url: 'https://www.youtube.com/watch?v=x_4LugKlkMA',
-        description: 'A guide on eating healthy by Sunnybrook Hospital' 
-      },
-      {
-        name: '10 Tips To NOT Screw Up Your Diet!',
-        url: 'https://www.youtube.com/watch?v=T4A4G6yuDLo',
-        description: 'This man has 5.6 million subs'
-      },
-      {
-        name: 'Shia LaBeouf "Just Do It" Motivational Speech',
-        url: 'https://www.youtube.com/watch?v=ZXsQAXx_ao0',
-        description: 'The goat'
-      },
+    {
+      name: 'How to stick to your healthy eating goals',
+      url: 'https://www.youtube.com/watch?v=x_4LugKlkMA',
+      description: 'A guide on eating healthy by Sunnybrook Hospital',
+    },
+    {
+      name: '10 Tips To NOT Screw Up Your Diet!',
+      url: 'https://www.youtube.com/watch?v=T4A4G6yuDLo',
+      description: 'This man has 5.6 million subs',
+    },
+    {
+      name: 'Shia LaBeouf "Just Do It" Motivational Speech',
+      url: 'https://www.youtube.com/watch?v=ZXsQAXx_ao0',
+      description: 'The goat',
+    },
   ]);
 };
 
