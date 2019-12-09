@@ -50,10 +50,20 @@ nav {
     text-align: center;
 }
 
-.mainForm{
+.mainForm, h1{
     text-align: center;
 }
 
+.emptyFood{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 45px;
+}
+
+.foodWindow {
+    text-align: center;
+    margin-top: 15px;
+}
 
 .mainForm label {
     display: inline-block;
@@ -63,11 +73,25 @@ nav {
     font-size: 1.2em;
 }
 
+.foodForm{
+    text-align: center;
+}
+.foodForm label{
+    display: inline-block;
+    margin-right: 10px;
+    text-align: right;
+    font-size: 1.2em;
+}
+
 #calorieMessage{
     text-align: center;
 }
 
-.formSubmit {
+#pageTitle{
+    text-align: center;
+}
+
+.formSubmit, .makeFoodSubmit {
     transition: background-color 0.4s ease;
     display: block;
     text-align: center;
@@ -83,13 +107,13 @@ nav {
     text-decoration: none;
 }
 
-#homeTitle{
+#homeTitle, #animated-gif{
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
     border-radius: 25%;
-    width: 50%;
+    width: 60%;
 }
 
 

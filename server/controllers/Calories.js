@@ -1,4 +1,5 @@
 const models = require('../models');
+
 const Calories = models.Calories;
 
 const makerPage = (req, res) => {
@@ -59,23 +60,20 @@ const makeCalories = (req, res) => {
   return caloriePromise;
 };
 
-const searchFood = (req, res) => {
-  if (!req.query.search) {
-    return res.status(400).json({ error: 'Name of food is required' });
-  }
+// const deleteFood = (req, res) => {
+//   if (!req.body.id) {
+//     return res.status(400).json({ error: 'Food id is required to delete.' });
+//   }
 
-  const searchedFood = {
-    name: req.query.search,
-  };
+//   return Calories.CaloriesModel.deleteById(req.body.id, (err) => {
+//     if (err) {
+//       console.log(err);
+//       return res.status(500).json({ error: 'An error ocurred.' });
+//     }
 
-  return Calories.CaloriesModel.findFood(searchedFood, (err, doc) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({ error: 'An error occurred.' });
-    }
-    return res.json({ foods: doc });
-  });
-};
+//     return res.status(200).json({ msg: 'Food deleted successfully.' });
+//   });
+// };
 
 const getFoods = (request, response) => {
   const req = request;
@@ -87,7 +85,7 @@ const getFoods = (request, response) => {
       return res.status(400).json({ error: 'An error occurred.' });
     }
 
-    return res.json({ beers: docs });
+    return res.json({ foods: docs });
   });
 };
 
@@ -95,4 +93,4 @@ const getFoods = (request, response) => {
 module.exports.makerPage = makerPage;
 module.exports.make = makeCalories;
 module.exports.getFoods = getFoods;
-module.exports.searchFood = searchFood;
+// module.exports.deleteFood = deleteFood;
