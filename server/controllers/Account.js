@@ -9,7 +9,7 @@ const loginPage = (req, res) => {
 };
 
 const notFoundPage = (req, res) => {
-  res.render('notFound', { csrfToken: req.csrfToken(),
+  res.render('404', { csrfToken: req.csrfToken(),
   });
 };
 
@@ -42,7 +42,7 @@ const login = (request, response) => {
     req.session.account = Account.AccountModel.toAPI(account);
 
     return res.json({
-      redirect: '/myPage',
+      redirect: '/maker',
     });
   });
 };
@@ -82,7 +82,7 @@ const signup = (request, response) => {
     savePromise.then(() => {
       req.session.account = Account.AccountModel.toAPI(newAccount);
       return res.json({
-        redirect: '/userPage',
+        redirect: '/maker',
       });
     });
 
@@ -175,5 +175,5 @@ module.exports = {
   login,
   signup,
   changePassword,
-  getToken
-}
+  getToken,
+};

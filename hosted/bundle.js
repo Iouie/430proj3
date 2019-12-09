@@ -1,32 +1,4 @@
 'use strict';
-// helper function to create an error message with desired error text
-var handleError = function handleError(message) {
-    $('#errorMessage').text(message);
-    $('#calorieMessage').animate({ height: 'toggle' }, 350);
-};
-
-// redirect page and hide error
-var redirect = function redirect(response) {
-    $('#calorieMessage').animate({ height: 'hide' }, 350);
-    window.location = response.redirect;
-};
-
-// send ajax data and handle error
-var sendAjax = function sendAjax(type, action, data, success) {
-    $.ajax({
-        cache: false,
-        type: type,
-        url: action,
-        data: data,
-        dataType: 'json',
-        success: success,
-        error: function error(xhr, status, _error) {
-            var messageObj = JSON.parse(xhr.responseText);
-            handleError(messageObj.error);
-        }
-    });
-};
-
 
 var handleCalories = function handleCalories(e) {
     e.preventDefault();
@@ -68,7 +40,7 @@ var FoodForm = function FoodForm(props) {
         null,
         React.createElement(
             'h1',
-            { id: 'makerTitle' },
+            { id: 'foodTitle' },
             'Foods'
         ),
         React.createElement(
@@ -108,11 +80,6 @@ var FoodForm = function FoodForm(props) {
                         method: 'POST',
                         className: 'foodForm' },
                     React.createElement(
-                        'span',
-                        { className: 'close' },
-                        '\xD7'
-                    ),
-                    React.createElement(
                         'label',
                         { htmlFor: 'name' },
                         'Name: '
@@ -142,6 +109,7 @@ var FoodForm = function FoodForm(props) {
                         'Fat: '
                     ),
                     React.createElement('input', { id: 'foodFat', type: 'text', name: 'fat', placeholder: 'Fat' }),
+
                     React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
                     React.createElement('input', { className: 'makeFoodSubmit', type: 'submit', value: 'Log Food' })
                 )
@@ -245,7 +213,7 @@ var FoodList = function FoodList(props) {
             'p',
             { className: 'totalCount' },
             props.foods.length,
-            ' foods'
+            ' foods '
         )
     );
 };
@@ -277,3 +245,28 @@ $(document).ready(function () {
     getToken();
 });
 
+'use strict';
+var handleError = function handleError(message) {
+    $('#errorMessage').text(message);
+    $('#calorieMessage').animate({ height: 'toggle' }, 350);
+};
+
+var redirect = function redirect(response) {
+    $('#calorieMessage').animate({ height: 'hide' }, 350);
+    window.location = response.redirect;
+};
+
+var sendAjax = function sendAjax(type, action, data, success) {
+    $.ajax({
+        cache: false,
+        type: type,
+        url: action,
+        data: data,
+        dataType: 'json',
+        success: success,
+        error: function error(xhr, status, _error) {
+            var messageObj = JSON.parse(xhr.responseText);
+            handleError(messageObj.error);
+        }
+    });
+};

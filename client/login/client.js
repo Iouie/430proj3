@@ -1,23 +1,18 @@
+  
 const handleLogin = (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  $('#calorieMessage').animate({height: 'hide'}, 350);
+    if ($('#user').val() == '' || $('#pass').val() == '') {
+        handleError("All fields are required");
+        return false;
+    }
 
-  if ($("#user").val() == '') {
-    handleError("Username is required");
+    console.log($('input[name=_csrf]').val());
+
+    sendAjax('POST', $('#loginForm').attr('action'), $('#loginForm').serialize(), redirect);
+
     return false;
-  }
-
-  if ($("#pass").val() == '') {
-    handleError("Password is required");
-    return false;
-  }
-
-
-  sendAjax($("#loginForm").attr("action"), $("#loginForm").serialize());
-
-  return false;
-};
+}
 
 
 const handleSignup = (e) => {
@@ -35,7 +30,7 @@ const handleSignup = (e) => {
     return false;
   }
 
-  sendAjax($("#signupForm").attr("action"), $("#signupForm").serialize());
+  sendAjax('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
 
   return false;
 };
@@ -48,82 +43,37 @@ const LoginWindow = (props) => {
     action='/login'
     method='POST'
     className='mainForm'>
-    <div class='row justify-content-center'>
-               <div class='form-group .col-md-3'>
                  <label htmlFor='username'>Username: </label>
-                 <input id='user' type='text' name='username' placeholder='Username' />
-               </div>
-             </div>
-    
-             <div class='row justify-content-center'>
-               <div class='form-group .col-md-3'>
+                 <input id='user' type='text' name='username' placeholder='username' />
+
                  <label htmlFor='password'>Password: </label>
                  <input id='pass' type='password' name='password' placeholder='Password' />
-               </div>
-             </div>
-    
-             <div class='row justify-content-center'>
-               <div class='form-group .col-md-3'>
-                 <input type="hidden" name="_csrf" value={props.csrf} />
-                 <input class='btn btn-outline-light' id='loginButton' type='submit' value='Sign In' />
-               </div>
-             </div>
-    
-    <div class='row justify-content-center'>
-    <div class='form-group .col-md-3'>
-      <p>Dont have an account? <a href='./signup'>Sign Up</a></p>
-     </div>
-   </div>
 
-         <div class='row'>
-           <div class='col text-center'>
-             <div class="alert alert-danger" id="errorMessage" role="alert" style='display:none;'>
-             </div>
-           </div>
-         </div>
+                 <input type="hidden" name="_csrf" value={props.csrf} />
+                 <input className='formSubmit' type='submit' value='Sign In' />
          </form>
   );
 };
 
-const SignupForm = (props) => {
+const SignupWindow = (props) => {
   return (
-          <form id='signupForm' name='signupForm' onSubmit={handleSignup} action='/signup' method='POST' class='mainForm'>
-              <div class='row justify-content-center'>
-                  <div class='form-group .col-md-3'>
-                      <input class='field' id='user' type='text' name='username' placeholder='Username' />
-                  </div>
-              </div>
+          <form id='signupForm' 
+          name='signupForm' 
+          onSubmit={handleSignup} 
+          action='/signup' 
+          method='POST' 
+          class='mainForm'>
+                      <label htmlFor='username'>Username: </label>
+                      <input id='user' type='text' name='username' placeholder='Username' />
 
-              <div class='row justify-content-center'>
-                  <div class='form-group .col-md-3'>
-                      <input class='field' id='pass' type='password' name='pass' placeholder='Password' />
-                  </div>
-              </div>
+                      <label htmlFor='pass'>Password: </label>
+                      <input id='pass' type='password' name='pass' placeholder='Password' />
 
-              <div class='row justify-content-center'>
-                  <div class='form-group .col-md-3'>
-                      <input class='field' id='pass2' type='password' name='pass2' placeholder='Retype Password' />
-                  </div>
-              </div>
+                      <label htmlFor='pass2'>Password: </label>
+                      <input id='pass2' type='password' name='pass2' placeholder='Retype Password' />
 
-              <div class='row justify-content-center'>
-                  <div class='col-md-1'>
-                      <input id="signupCsrf" type="hidden" name="_csrf" value={props.csrf} />
-                      <button class='btn btn-outline-light' id='signupButton' type='submit'>Sign Up</button>
-                  </div>
-              </div>
-          <div class='row'>
-              <div class='col text-center'>
-                  <p>Have an account? <a href='./login'>Login</a></p>
-              </div>
-          </div>
-
-          <div class='row'>
-              <div class='col text-center'>
-                  <div class="alert alert-danger" id="errorMessage" role="alert" style='display:none;'>
-                  </div>
-              </div>
-          </div>
+                      <input type="hidden" name="_csrf" value={props.csrf} />
+                      <input className='formSubmit' type='submit'value='Sign Up' />
           </form>
   );
 };

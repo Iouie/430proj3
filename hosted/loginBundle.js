@@ -15,7 +15,7 @@ var handleLogin = function handleLogin(e) {
     return false;
   }
 
-  sendAjax($("#loginForm").attr("action"), $("#loginForm").serialize());
+  sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
 
   return false;
 };
@@ -35,7 +35,7 @@ var handleSignup = function handleSignup(e) {
     return false;
   }
 
-  sendAjax($("#signupForm").attr("action"), $("#signupForm").serialize());
+  sendAjax('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
 
   return false;
 };
@@ -49,26 +49,24 @@ var LoginWindow = function LoginWindow(props) {
       action: '/login',
       method: 'POST',
       className: 'mainForm' },
-
-        React.createElement(
-          'label',
-          { htmlFor: 'username' },
-          'Username: '
-        ),
-
-        React.createElement('input', { id: 'user', type: 'text', name: 'username', placeholder: 'Username' }),
-        React.createElement(
-          'label',
-          { htmlFor: 'password' },
-          'Password: '
-        ),
-        React.createElement('input', { id: 'pass', type: 'password', name: 'password', placeholder: 'Password' }),
-        React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
-        React.createElement('input', { className: 'formSubmit', id: 'loginButton', type: 'submit', value: 'Sign In' }),
-    );
+    React.createElement(
+      'label',
+      { htmlFor: 'username' },
+      'Username: '
+    ),
+    React.createElement('input', { id: 'user', type: 'text', name: 'username', placeholder: 'Username' }),
+    React.createElement(
+      'label',
+      { htmlFor: 'password' },
+      'Password: '
+    ),
+    React.createElement('input', { id: 'pass', type: 'password', name: 'password', placeholder: 'Password' }),
+    React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
+    React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Sign In' })
+  );
 };
 
-var SignupForm = function SignupForm(props) {
+var SignupWindow = function SignupWindow(props) {
   return React.createElement(
     'form',
     { id: 'signupForm', name: 'signupForm', 
@@ -78,27 +76,25 @@ var SignupForm = function SignupForm(props) {
     className: 'mainForm' },
     React.createElement(
       'label',
-      {htmlFor: 'username'},
+      { htmlFor: 'username' },
       'Username: '
     ),
-      React.createElement('input', { 'class': 'field', id: 'user', type: 'text', name: 'username', placeholder: 'Username' }),
-      React.createElement(
-        'label',
-        {htmlFor: 'pass' },
-        'Password: '
-        ),
-        React.createElement('input', {id: 'pass', type: 'password', name: 'pass', placeholder: 'Password' }),
-        React.createElement(
-          'label',
-          {htmlFor: 'pass2'},
-          'Retype Password: '
-        ),
-        React.createElement('input', { id: 'pass2', type: 'password', name: 'pass2', placeholder: 'Retype Password' }),
-        React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
-        React.createElement(
-          'input',
-          { className: 'formSubmit', id: 'signupButton', type: 'submit', value: 'Sign Up' }),
-          );
+    React.createElement('input', {id: 'user', type: 'text', name: 'username', placeholder: 'Username' }),
+    React.createElement(
+      'label',
+      { htmlFor: 'pass' },
+      'Password: '
+    ),
+    React.createElement('input', {id: 'pass', type: 'password', name: 'pass', placeholder: 'Password' }),
+    React.createElement(
+      'label',
+      { htmlFor: 'pass2' },
+      'Password: '
+    ),
+    React.createElement('input', { id: 'pass2', type: 'password', name: 'pass2', placeholder: 'Retype Password' }),
+    React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
+    React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Sign Up' })
+  );
 };
 
 var createLoginWindow = function createLoginWindow(csrf) {
@@ -134,6 +130,7 @@ var getToken = function getToken() {
   });
 };
 
+// load in csrf token
 $(document).ready(function () {
   getToken();
 });
@@ -147,6 +144,11 @@ var redirect = function redirect(response) {
     $('#calorieMessage').animate({ height: 'hide' }, 350);
     window.location = response.redirect;
 };
+
+// var handlePass = function handlePass(message) {
+//     $("#successMessage").text(message);
+//     $("#successMessage").show();
+// };
 
 var sendAjax = function sendAjax(type, action, data, success) {
     $.ajax({

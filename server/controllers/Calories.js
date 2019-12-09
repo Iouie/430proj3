@@ -7,7 +7,7 @@ const makerPage = (req, res) => {
       console.log(err);
       return res.status(400).json({
         error: 'An error occurred',
-      }); 
+      });
     }
 
     return res.render('app', {
@@ -18,7 +18,7 @@ const makerPage = (req, res) => {
 };
 
 const makeCalories = (req, res) => {
-  if (!req.body.name || !req.body.cals 
+  if (!req.body.name || !req.body.cals
     || req.body.carbs || !req.body.protein
     || req.body.fat) {
     return res.status(400).json({

@@ -1,4 +1,4 @@
-const handleCalories = (e) => {
+const HandleCalories = (e) => {
   e.preventDefault();
 
   $('#calorieMessage').animate({height:'hide'}, 350);
@@ -36,10 +36,19 @@ const searchFood = (e) => {
   });
 };
 
+const deleteFood = (e) => {
+	const id = e.target.parentElement.querySelector('.foodid').innerText;
+	const _csrf = document.querySelector('input[name="_csrf"]').value;
+	
+	sendAjax('DELETE', '/deleteFood', {id, _csrf}, data => {
+		loadFoodsFromServer();
+	});
+};
+
 const FoodForm = (props) => {
   return (
     <div>
-      <h1 id='makerTitle'>Foods</h1>
+      <h1 id='foodTitle'>Foods</h1>
       <form id='searchFoodForm'
                 onSubmit={searchFood}
                 name='searchForm'
@@ -50,26 +59,31 @@ const FoodForm = (props) => {
                 <input id='searchFood' type='text' name='search' placeholder='Search' />
                 <input className='searchFoodSubmit' type='submit' value='Search' />
 </form>
+
      <button id="newFoodBtn">New Food</button>
             <div id="newFoodWindow" className="foodWindow">
                 <div className="newFoodContent">
                     <form id='foodForm'
-                        onSubmit={handleCalories}
+                        onSubmit={HandleCalories}
                         name='foodForm'
                         action='/maker'
                         method='POST'
                         className='foodForm' >
-                            <span className="close">&times;</span>
                             <label htmlFor='name'>Name: </label>
                             <input id='foodName' type='text' name='name' placeholder='Food Name' />
+
                             <label htmlFor='cals'>Calories: </label>
                             <input id='foodCal' type='text' name='cals' placeholder='Calories' />
+
                             <label htmlFor='carbs'>Carbs: </label>
                             <input id='foodCarbs' type='text' name='carbs' placeholder='Carbs' />
+
                             <label htmlFor='protein'>Protein: </label>
                             <input id='foodProtein' type='text' name='protein' placeholder='Protein' />
+
                             <label htmlFor='fat'>Fat: </label>
                             <input id='foodFat' type='text' name='fat' placeholder='Fat' />
+                            
                             <input type='hidden' name='_csrf' value={props.csrf} />
                             <input className='makeFoodSubmit' type='submit' value='Add Food' />
                     </form>
