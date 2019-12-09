@@ -236,6 +236,7 @@ var setup = function setup(csrf) {
 
         loadFoodsFromServer();
         handleChangePassword(csrf);
+        handleUpgradeClick();
 };
 
 // get csrf token
@@ -331,7 +332,7 @@ var ChangePassword = function ChangePassword(props) {
         ),
         React.createElement('input', { id: 'newPass2', type: 'password', name: 'newPass2', placeholder: 'Retype New Password' }),
         React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf, placeholder: props.csrf }),
-        React.createElement('input', { className: 'submitForm', type: 'submit', value: 'Change' })
+        React.createElement('input', { className: 'submitForm', type: 'submit', value: 'Change' }),
     );
 };
 var PassTitle = function PassTitle(props) {
@@ -346,7 +347,7 @@ var FoodTitle = function FoodTitle(props) {
     return React.createElement(
         'div',
         {id: 'sup' },
-        ''
+        '',
     );
 };
 
@@ -374,5 +375,82 @@ var handleChangePassword = function handleChangePassword(csrf) {
     changePass.addEventListener('click', function (e) {
         e.preventDefault();
         createChangePasswordView(csrf);
+    });
+};
+
+// remove ads
+'use strict';
+
+
+var UpgradeAccount = function UpgradeAccount(props) {
+    $('#calorieMessage').animate({ height: 'hide' }, 350);
+    return React.createElement(
+        'div',
+        { id: 'upgradeContent' },
+        React.createElement(
+            'h3',
+            null,
+            'Upgrade your account to get rid of ads!'
+        ),
+        React.createElement(
+            'button',
+            { className: 'upgradeButton' },
+            'Upgrade'
+        )
+    );
+};
+
+var UpgradeTitle = function UpgradeTitle(props) {
+    return React.createElement(
+        'h2',
+        { id: 'upgradeTitle' },
+        'Upgrade Account'
+    );
+};
+
+var Nothing = function Nothing(props) {
+    return React.createElement(
+        'div',
+            {id: 'hi'},
+            ''
+    );
+};
+
+var Footer = function Footer(props){
+    return React.createElement(
+        'footer',
+        {id: 'ad'},
+        'Insert Ad Here'
+    );
+}
+
+var createUpgradeTitle = function createUpgradeTitle() {
+        ReactDOM.render(React.createElement(UpgradeTitle, null), document.querySelector('#makeFood'));
+};
+
+var createUpgradeAccountInfo = function createUpgradeAccountInfo() {
+        ReactDOM.render(React.createElement(UpgradeAccount, null), document.querySelector('#foods'));
+};
+
+var createNothing = function createNothing(){
+    ReactDOM.render(React.createElement(Nothing, null), document.querySelector('#deleteFood'));
+}
+
+var createFooter = function createFooter(){
+    reactDOM.render(React.createElement(Footer, null), document.querySelector('#ad'));
+}
+
+var createUpgradeView = function createUpgradeView() {
+    createUpgradeTitle();
+    createUpgradeAccountInfo();
+    createNothing();
+};
+
+var handleUpgradeClick = function handleUpgradeClick() {
+    var upgrade = document.querySelector('#upgrade');
+
+    upgrade.addEventListener('click', function (e) {
+        e.preventDefault();
+        createUpgradeView();
     });
 };
