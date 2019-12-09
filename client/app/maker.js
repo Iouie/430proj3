@@ -137,6 +137,7 @@ const setup = function(csrf) {
       );
   
       loadFoodsFromServer();
+      handleChangePassword(csrf);
 
   }
 };

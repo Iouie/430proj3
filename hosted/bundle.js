@@ -235,6 +235,7 @@ var setup = function setup(csrf) {
         ReactDOM.render(React.createElement(FoodList, { foods: [] }), document.querySelector('#foods'));
 
         loadFoodsFromServer();
+        handleChangePassword(csrf);
 };
 
 // get csrf token
@@ -247,6 +248,7 @@ var getToken = function getToken() {
 $(document).ready(function () {
     getToken();
 });
+
 
 'use strict';
 var handleError = function handleError(message) {
@@ -272,5 +274,92 @@ var sendAjax = function sendAjax(type, action, data, success) {
             console.log(messageObj);
             handleError(messageObj.error);
         }
+    });
+};
+
+'use strict';
+
+// change password
+
+var handlePasswordChange = function handlePasswordChange(e) {
+    e.preventDefault();
+
+    $('#calorieMessage').animate({ height: 'hide' }, 350);
+
+    if ($('currPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
+        handleError('All fields are required');
+        return false;
+    }
+
+    if ($('#newPass').val() !== $('#newPass2').val()) {
+        handleError('Passwords do not match');
+        return false;
+    }
+
+    sendAjax('POST', '/changePassword', $('#changePassForm').serialize(), function () {
+        handleError('Password successfully changed');
+    });
+
+    return false;
+};
+
+var ChangePassword = function ChangePassword(props) {
+    return React.createElement(
+        'form',
+        { id: 'changePassForm', 
+        name: 'changePassForm', 
+        action: 'changePassword', 
+        onSubmit: handlePasswordChange, 
+        method: 'POST' 
+    },
+        React.createElement(
+            'label',
+            { htmlFor: 'currPass' },
+            ' Current Password: '
+        ),
+        React.createElement('input', { id: 'currPass', type: 'password', name: 'currPass', placeholder: 'Current Password' }),
+        React.createElement(
+            'label',
+            { htmlFor: 'newPass' },
+            ' New Password: '
+        ),
+        React.createElement('input', { id: 'newPass', type: 'password', name: 'newPass', placeholder: 'New Password' }),
+        React.createElement(
+            'label',
+            { htmlFor: 'newPass2' },
+            ' Confirm New Password: '
+        ),
+        React.createElement('input', { id: 'newPass2', type: 'password', name: 'newPass2', placeholder: 'Retype New Password' }),
+        React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf, placeholder: props.csrf }),
+        React.createElement('input', { className: 'submitForm', type: 'submit', value: 'Change' })
+    );
+};
+var PassTitle = function PassTitle(props) {
+    return React.createElement(
+        'h2',
+        { id: 'passwordTitle' },
+        'Change Password'
+    );
+};
+
+var createPassTitle = function createPassTitle() {
+        ReactDOM.render(React.createElement(PassTitle, null), document.querySelector('#makeFood'));
+};
+
+var createChangePasswordForm = function createChangePasswordForm(csrf) {
+        ReactDOM.render(React.createElement(ChangePassword, { csrf: csrf }), document.querySelector('#foods'));
+};
+
+var createChangePasswordView = function createChangePasswordView(csrf) {
+    createPassTitle();
+    createChangePasswordForm(csrf);
+};
+
+var handleChangePassword = function handleChangePassword(csrf) {
+    var changePass = document.querySelector('#changePassword');
+
+    changePass.addEventListener('click', function (e) {
+        e.preventDefault();
+        createChangePasswordView(csrf);
     });
 };

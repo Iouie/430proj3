@@ -106,11 +106,11 @@ const changePassword = (request, response) => {
   const req = request;
   const res = response;
 
-  req.body.currentPassword = `${req.body.currentPassword}`;
+  req.body.currPass = `${req.body.currPass}`;
   req.body.newPass = `${req.body.newPass}`;
   req.body.newPass2 = `${req.body.newPass2}`;
 
-  if (!req.body.currentPassword || !req.body.newPass || !req.body.newPass2) {
+  if (!req.body.currPass || !req.body.newPass || !req.body.newPass2) {
     return res.status(400).json({
       error: 'All fields are required',
     });
@@ -122,7 +122,7 @@ const changePassword = (request, response) => {
     });
   }
 
-  return Account.AccountModel.authenticate(req.session.account.username, req.body.currentPassword,
+  return Account.AccountModel.authenticate(req.session.account.username, req.body.currPass,
     (err, pass) => {
       if (err || !pass) {
         return res.status(401).json({
@@ -148,7 +148,7 @@ const changePassword = (request, response) => {
           }
 
           return res.status(200).json({
-            redirect: '/userPage',
+            redirect: '/login',
           });
         });
       });

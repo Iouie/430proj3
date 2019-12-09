@@ -145,11 +145,6 @@ var redirect = function redirect(response) {
     window.location = response.redirect;
 };
 
-// var handlePass = function handlePass(message) {
-//     $("#successMessage").text(message);
-//     $("#successMessage").show();
-// };
-
 var sendAjax = function sendAjax(type, action, data, success) {
     $.ajax({
         cache: false,
