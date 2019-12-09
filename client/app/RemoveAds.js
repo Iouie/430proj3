@@ -1,12 +1,12 @@
 
-const UpgradeAccount = (props) => {
-    return (
-        <div id="upgradeContent">
-            <h3>Upgrade your account to get rid of ads!</h3>
-            <button className="upgradeButton" onClick={RemoveAds}>Upgrade</button>
-        </div>
-    );
-};
+// const UpgradeAccount = (props) => {
+//     return (
+//         <div id="upgradeContent">
+//             <h3>Upgrade your account to get rid of ads!</h3>
+//             <button className="upgradeButton" onClick={RemoveAds}>Upgrade</button>
+//         </div>
+//     );
+// };
 
 // function to remove ads
 
